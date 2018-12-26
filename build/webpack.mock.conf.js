@@ -13,14 +13,20 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-const entry = baseWebpackConfig.entry
-Object.keys(entry).forEach(name => {
-  if (Array.isArray(entry[name])) {
-    entry[name].push('./src/mock')
-  } else {
-    entry[name] = [entry[name], './src/mock']
-  }
-})
+let entry = baseWebpackConfig.entry
+if (Array.isArray(entry)) {
+  entry.push('./src/mock')
+} else if (typeof entry === 'object') {
+  Object.keys(entry).forEach(name => {
+    if (Array.isArray(entry[name])) {
+      entry[name].psuh('./src/mock')
+    } else {
+      entry[name] = [entry[name], './src/mock']
+    }
+  })
+} else {
+  baseWebpackConfig.entry = [entry, './src/mock']
+}
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
