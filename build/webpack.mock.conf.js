@@ -13,7 +13,7 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-// vue-cli 生成的项目因为通过 webpack-dev-server 打开，所以通过 node 命令行参数的形式动态添加入口文件
+// vue-cli 生成的项目因为通过 webpack-dev-server 打开，所以无法通过 node 命令行参数的形式动态添加入口文件
 // 所以 cpoy 一份 dev 的配置文件，通过单独的脚本命令 npm run mock 启动
 let entry = baseWebpackConfig.entry
 if (Array.isArray(entry)) {
